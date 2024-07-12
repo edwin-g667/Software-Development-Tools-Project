@@ -5,7 +5,10 @@ import plotly_express as px
 df = pd.read_csv('vehicles_us.csv')
 st.header('SDT Project')
 
+df['model_year'] = df['model_year'].fillna(df['model_year'].median())
+
 fig = px.scatter(df, x='model_year', y='price', title='Price and Model Year', labels={'model_year':'Model Year', 'price':'Sell Price'})
+fig.update_yaxes(range=[5000, 200000])
 st.plotly_chart(fig)
 
 show_histogram = st.checkbox('Show Histogram')
